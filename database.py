@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
 # Database Connection (PostgreSQL)
-DATABASE_URL = "postgresql://postgres:bishal123@localhost/sentiment_db"
+DATABASE_URL = "postgresql://postgres:password@localhost/sentiment_db"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -29,11 +29,11 @@ class SentimentAnalysis(Base):
 
     user = relationship("User")
 
-# ✅ Create Tables
+#  Create Tables
 def init_db():
     Base.metadata.create_all(bind=engine)
 
-# ✅ Function to Get Database Session
+# Function to Get Database Session
 def get_db():
     db = SessionLocal()
     try:
