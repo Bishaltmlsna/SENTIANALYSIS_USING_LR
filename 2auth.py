@@ -15,18 +15,18 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 SECRET_KEY = "493869e1fabb5f07a2bcba608030c78b2eccd81cfaa5ebe8c97c81c5db584618"
 ALGORITHM = "HS256"
 
-# ✅ Pydantic Model for User Registration
+#  Pydantic Model for User Registration
 class UserCreate(BaseModel):
     username: str = Field(..., min_length=3, max_length=20)
     email: EmailStr
     password: str = Field(..., min_length=8)
 
-# ✅ Pydantic Model for User Login
+# Pydantic Model for User Login
 class UserLogin(BaseModel):
     username: str
     password: str
 
-# ✅ Register New User with Validation
+#  Register New User with Validation
 @app.post("/register/")
 def register(user: UserCreate, db: Session = Depends(database.get_db)):
     # Ensure username only contains letters, numbers, and underscores
@@ -53,7 +53,7 @@ def register(user: UserCreate, db: Session = Depends(database.get_db)):
 
     return {"message": "User registered successfully!"}
 
-# ✅ Login API (Returns JWT Token)
+# Login API (Returns JWT Token)
 @app.post("/login/")
 def login(user: UserLogin, db: Session = Depends(database.get_db)):
     existing_user = db.query(database.User).filter(database.User.username == user.username).first()
