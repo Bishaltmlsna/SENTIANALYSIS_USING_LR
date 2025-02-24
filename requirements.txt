@@ -1,0 +1,33 @@
+# Core dependencies
+fastapi
+uvicorn
+streamlit
+
+# Machine Learning & NLP
+scikit-learn==1.5.1 
+joblib
+pandas
+numpy
+tweepy # For fetching Twitter data
+
+# Database & ORM
+sqlalchemy
+psycopg2-binary # PostgreSQL adapter for Python
+
+# Authentication & Security
+passlib
+bcrypt
+python-jose[cryptography] # JWT for authentication
+pydantic
+email-validator  # Required for email validation
+
+# Visualization & UI Enhancements
+matplotlib
+seaborn
+streamlit-extras # To enhance Streamlit UI
+
+# Web Requests
+requests
+
+# Docker Support (Optional)
+python-dotenv  # For environment variables
