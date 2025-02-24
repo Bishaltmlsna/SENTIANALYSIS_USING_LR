@@ -10,7 +10,7 @@ from jose import JWTError, jwt
 model = joblib.load("sentiment_model.pkl")
 vectorizer = joblib.load("vectorizer.pkl")
 
-# 🔐 JWT Authentication
+#  JWT Authentication
 SECRET_KEY = "493869e1fabb5f07a2bcba608030c78b2eccd81cfaa5ebe8c97c81c5db584618"
 ALGORITHM = "HS256"
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
