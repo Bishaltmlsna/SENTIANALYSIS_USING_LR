@@ -4,24 +4,24 @@ import pandas as pd
 import tweepy
 import re
 
-# 🎯 FastAPI Backend URLs
+# FastAPI Backend URLs
 FASTAPI_AUTH_URL = "http://127.0.0.1:8000"
 FASTAPI_SENTIMENT_URL = "http://127.0.0.1:8001/predict/"
 
-# 🐦 Twitter API Credentials (Replace with your actual credentials)
-TWITTER_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMyUwAEAAAAA68rDoxTnR1bxzRtabXjbisR6FkI%3Dc6JJHSPz3Jbff86cU4O7eY01DgUXLsEtWSrmw1gQqpkGGIHbfJ"
+# Twitter API Credentials (Replace with your actual credentials)
+TWITTER_BEARER_TOKEN = ""
 client = tweepy.Client(bearer_token=TWITTER_BEARER_TOKEN)
 
-# 🎨 Streamlit Page Config
+#  Streamlit Page Config
 st.set_page_config(page_title="Sentiment Analysis", page_icon="💡", layout="wide")
 
-# 🔐 Authentication State
+#  Authentication State
 if "auth_token" not in st.session_state:
     st.session_state.auth_token = None
 if "page" not in st.session_state:
     st.session_state.page = "login"  # Default Page is Login
 
-# 🎨 **Custom Styling (Modern UI)**
+# **Custom Styling (Modern UI)**
 st.markdown("""
     <style>
         body {
@@ -59,7 +59,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 📌 **Login Page**
+# **Login Page**
 def login_page():
     # Clear any previous login input by explicitly setting default values.
     st.markdown("<h2 class='title'>🔐 Login</h2>", unsafe_allow_html=True)
@@ -90,7 +90,7 @@ def login_page():
     st.markdown("</div>", unsafe_allow_html=True)
     st.stop()
 
-# 📌 **Register Page**
+#  **Register Page**
 def register_page():
     st.markdown("<h2 class='title'>📝 Register</h2>", unsafe_allow_html=True)
     st.markdown("<div class='login-box'>", unsafe_allow_html=True)
@@ -154,7 +154,7 @@ def sentiment_analysis_page():
     with st.sidebar:
         tab = st.radio("Navigation", ["Single Text Analysis", "Bulk CSV Analysis", "Twitter Sentiment Analysis"])
 
-        # ✅ Logout Button in Sidebar (Left Side at Bottom)
+        #  Logout Button in Sidebar (Left Side at Bottom)
         if st.button("🚪 Logout", key="logout_button", help="Click to logout"):
             st.session_state.auth_token = None
             st.session_state.page = "login"
@@ -179,7 +179,7 @@ def sentiment_analysis_page():
                 else:
                     st.error("❌ API Error: Backend not responding.")
 
-    # **📂 BULK CSV SENTIMENT ANALYSIS**
+    # ** BULK CSV SENTIMENT ANALYSIS**
     if tab == "Bulk CSV Analysis":
         st.subheader("📂 Upload a CSV File")
         uploaded_file = st.file_uploader("Upload a CSV file with a 'text' column", type=['csv'])
@@ -200,7 +200,7 @@ def sentiment_analysis_page():
                 csv = data.to_csv(index=False).encode('utf-8')
                 st.download_button("Download CSV", data=csv, file_name='sentiment_analysis.csv', mime='text/csv')
 
-    # **🐦 REAL-TIME TWITTER SENTIMENT ANALYSIS**
+    # ** REAL-TIME TWITTER SENTIMENT ANALYSIS**
     if tab == "Twitter Sentiment Analysis":
         st.subheader("🐦 Enter a Twitter Username:")
         twitter_username = st.text_input("Enter Twitter username (without @)")
@@ -231,7 +231,7 @@ def sentiment_analysis_page():
                     except Exception as e:
                         st.error(f"❌ Error fetching tweets: {e}")
 
-# 📌 **Page Routing**
+#  **Page Routing**
 if st.session_state.page == "login":
     login_page()
 elif st.session_state.page == "register":
